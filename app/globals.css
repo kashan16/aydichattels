@@ -1,15 +1,15 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
+  /* FIX 1: was --font-sans: var(--font-sans) — circular, resolves to nothing */
+  --font-sans: 'Jost', sans-serif;
   --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
+  --font-heading: 'Cormorant Garamond', serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -48,83 +48,165 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* ─────────────────────────────────────────────────────────────────────────────
+   FIX 2: All :root variables now use the warm artisan palette instead of
+   the default shadcn white/black, so bg-background and text-foreground
+   will render the correct brand colours everywhere.
+───────────────────────────────────────────────────────────────────────────── */
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
+  /* Brand colours */
+  --background:            #F7F2E9;   /* warm cream page background           */
+  --foreground:            #1E130C;   /* deep espresso text                   */
+
+  --card:                  #F0E8D8;   /* slightly deeper cream for cards      */
+  --card-foreground:       #1E130C;
+
+  --popover:               #F7F2E9;
+  --popover-foreground:    #1E130C;
+
+  --primary:               #1E130C;   /* dark espresso — main CTA bg          */
+  --primary-foreground:    #F7F2E9;
+
+  --secondary:             #EDE3D4;   /* pale sand                            */
+  --secondary-foreground:  #1E130C;
+
+  --muted:                 #EDE3D4;
+  --muted-foreground:      #8A7060;   /* warm grey-brown for secondary text   */
+
+  --accent:                #B85C38;   /* terracotta accent                    */
+  --accent-foreground:     #F7F2E9;
+
+  --destructive:           oklch(0.577 0.245 27.325);
+
+  --border:                #E2D7C8;   /* warm light border                    */
+  --input:                 #E2D7C8;
+  --ring:                  #C9A86C;   /* gold focus ring                      */
+
+  /* Chart palette — warm monotone */
+  --chart-1:               #C9A86C;
+  --chart-2:               #B85C38;
+  --chart-3:               #8A7060;
+  --chart-4:               #5A4438;
+  --chart-5:               #1E130C;
+
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+
+  /* Sidebar */
+  --sidebar:                    #F0E8D8;
+  --sidebar-foreground:         #1E130C;
+  --sidebar-primary:            #1E130C;
+  --sidebar-primary-foreground: #F7F2E9;
+  --sidebar-accent:             #EDE3D4;
+  --sidebar-accent-foreground:  #1E130C;
+  --sidebar-border:             #E2D7C8;
+  --sidebar-ring:               #C9A86C;
 }
 
+/* Dark mode — only activates when a .dark class is explicitly added */
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --background:            #1A0F08;
+  --foreground:            #F7F2E9;
+  --card:                  #2C1A0E;
+  --card-foreground:       #F7F2E9;
+  --popover:               #2C1A0E;
+  --popover-foreground:    #F7F2E9;
+  --primary:               #F0E8D8;
+  --primary-foreground:    #1E130C;
+  --secondary:             #3A2418;
+  --secondary-foreground:  #F7F2E9;
+  --muted:                 #3A2418;
+  --muted-foreground:      #C9A86C;
+  --accent:                #B85C38;
+  --accent-foreground:     #F7F2E9;
+  --destructive:           oklch(0.704 0.191 22.216);
+  --border:                rgba(255 255 255 / 0.08);
+  --input:                 rgba(255 255 255 / 0.12);
+  --ring:                  #C9A86C;
+  --chart-1:               #C9A86C;
+  --chart-2:               #B85C38;
+  --chart-3:               #8A7060;
+  --chart-4:               #5A4438;
+  --chart-5:               #3A2418;
+  --sidebar:                    #2C1A0E;
+  --sidebar-foreground:         #F7F2E9;
+  --sidebar-primary:            #C9A86C;
+  --sidebar-primary-foreground: #1E130C;
+  --sidebar-accent:             #3A2418;
+  --sidebar-accent-foreground:  #F7F2E9;
+  --sidebar-border:             rgba(255 255 255 / 0.08);
+  --sidebar-ring:               #C9A86C;
 }
 
+/* ─────────────────────────────────────────────────────────────────────────────
+   Base layer
+───────────────────────────────────────────────────────────────────────────── */
 @layer base {
-  * {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
+
   html {
-    @apply font-sans;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'Jost', sans-serif;
+    /* FIX 3: make sure the html root carries the brand background so there
+       are no dark gaps between sections or during scroll */
+    background-color: #F7F2E9;
   }
+
+  body {
+    /* FIX 4: use the CSS variable so it always stays in sync */
+    @apply bg-background text-foreground;
+    font-family: 'Jost', sans-serif;
+    overflow-x: hidden;
+    /* Extra guard — keeps the body cream even before React hydrates */
+    background-color: #F7F2E9;
+    color: #1E130C;
+  }
+
+  /* ── Custom scrollbar ──────────────────────────────────────────────── */
+  ::-webkit-scrollbar        { width: 6px; }
+  ::-webkit-scrollbar-track  { background: #F0E8D8; }
+  ::-webkit-scrollbar-thumb  { background: #C9A86C; border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: #B85C38; }
+
+  /* ── Selection ─────────────────────────────────────────────────────── */
+  ::selection {
+    background: rgba(184, 92, 56, 0.18);
+    color: #1E130C;
+  }
+
+  /* ── Focus ring ────────────────────────────────────────────────────── */
+  :focus-visible {
+    outline: 2px solid #B85C38;
+    outline-offset: 2px;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   FIX 5: Navbar clearance helpers
+   The fixed navbar is 76 px tall.  Anything that needs to sit below it
+   should use one of these utilities instead of hard-coding pt-28 everywhere.
+───────────────────────────────────────────────────────────────────────────── */
+@layer utilities {
+  .navbar-offset {
+    padding-top: 76px;
+  }
+  .navbar-offset-lg {
+    padding-top: 96px;   /* 76px nav + 20px breathing room */
+  }
+  .navbar-offset-xl {
+    padding-top: 112px;  /* original pt-28 = 7rem */
+  }
+
+  /* Section spacing helpers used across the site */
+  .section-py      { padding-top: 6rem;  padding-bottom: 6rem; }
+  .section-py-lg   { padding-top: 8rem;  padding-bottom: 8rem; }
+  .section-py-hero { padding-top: 7rem;  padding-bottom: 4rem; }
 }
