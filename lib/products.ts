@@ -1,8 +1,3 @@
-import { ElementType } from 'react'
-import { GiCandleLight } from 'react-icons/gi'
-import { MdBed, MdOutlineCoffee } from 'react-icons/md'
-import { PiFlower } from 'react-icons/pi'
-
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 export type Category = 'Beddings' | 'Home Décor' | 'Candles' | 'Crockery'
@@ -27,20 +22,10 @@ export type Product = {
     bgFrom: string
     bgTo: string
     accentColor: string
-    // FIX: `icon` removed from Product — functions can't be serialized across
-    //      the Server → Client Component boundary (causes Next.js 500 error).
-    //      Resolve the icon client-side via CATEGORY_ICONS[product.category].
+    // Replace picsum URLs with real product photos when ready.
+    image: string       // primary card / hero image
+    images: string[]    // gallery thumbnails (4 total, used in product detail page)
     isBestSeller?: boolean
-}
-
-// ─── Icon Map ─────────────────────────────────────────────────────────────────
-// Import this in CLIENT components only, never pass it through server props.
-
-export const CATEGORY_ICONS: Record<Category, ElementType> = {
-    Beddings: MdBed,
-    'Home Décor': PiFlower,
-    Candles: GiCandleLight,
-    Crockery: MdOutlineCoffee,
 }
 
 // ─── All Products ─────────────────────────────────────────────────────────────
@@ -59,27 +44,34 @@ export const products: Product[] = [
         tag: 'Best Seller',
         isBestSeller: true,
         description:
-        'Sink into unmatched softness with our Ivory Cloud Duvet Set, crafted from 300-thread-count Egyptian cotton. The breathable weave regulates temperature through every season, while the subtle ivory tone brings a timeless elegance to any bedroom. Each set includes a duvet cover and two matching pillowcases.',
+            'Sink into unmatched softness with our Ivory Cloud Duvet Set, crafted from 300-thread-count Egyptian cotton. The breathable weave regulates temperature through every season, while the subtle ivory tone brings a timeless elegance to any bedroom. Each set includes a duvet cover and two matching pillowcases.',
         details: [
-        '300-thread-count Egyptian cotton',
-        'Breathable & temperature-regulating',
-        'Hidden button closure',
-        'Machine washable at 40°C',
-        'Available in Twin, Queen, and King',
-        'OEKO-TEX certified fabric',
-        'Includes 1 duvet cover + 2 pillowcases',
+            '300-thread-count Egyptian cotton',
+            'Breathable & temperature-regulating',
+            'Hidden button closure',
+            'Machine washable at 40°C',
+            'Available in Twin, Queen, and King',
+            'OEKO-TEX certified fabric',
+            'Includes 1 duvet cover + 2 pillowcases',
         ],
         careInstructions:
-        'Machine wash cold with like colors. Tumble dry low. Do not bleach. Iron on medium heat if needed. Avoid fabric softeners to preserve the natural fiber quality.',
+            'Machine wash cold with like colors. Tumble dry low. Do not bleach. Iron on medium heat if needed. Avoid fabric softeners to preserve the natural fiber quality.',
         sizes: ['Twin (152×218 cm)', 'Queen (200×218 cm)', 'King (230×218 cm)'],
         colors: [
-        { name: 'Ivory', hex: '#F5EFE2' },
-        { name: 'Linen', hex: '#D4C0A0' },
-        { name: 'Slate', hex: '#8A9BA8' },
+            { name: 'Ivory', hex: '#F5EFE2' },
+            { name: 'Linen', hex: '#D4C0A0' },
+            { name: 'Slate', hex: '#8A9BA8' },
         ],
         bgFrom: '#D4C0A0',
         bgTo: '#BFA882',
         accentColor: '#C9A86C',
+        image: 'https://picsum.photos/seed/aydi-1/800/800',
+        images: [
+            'https://picsum.photos/seed/aydi-1/800/800',
+            'https://picsum.photos/seed/aydi-1b/800/800',
+            'https://picsum.photos/seed/aydi-1c/800/800',
+            'https://picsum.photos/seed/aydi-1d/800/800',
+        ],
     },
     {
         id: 2,
@@ -90,26 +82,33 @@ export const products: Product[] = [
         rating: 4.7,
         reviews: 187,
         description:
-        'Pure stonewashed linen pillowcases that get softer with every wash. The relaxed, lived-in texture of French linen adds artisanal charm to your bedscape while remaining cool to the touch through warm nights. Sold as a pair.',
+            'Pure stonewashed linen pillowcases that get softer with every wash. The relaxed, lived-in texture of French linen adds artisanal charm to your bedscape while remaining cool to the touch through warm nights. Sold as a pair.',
         details: [
-        '100% French stonewashed linen',
-        'Envelope closure — no zips or buttons',
-        'Pre-washed for softness',
-        'Gets softer with each wash',
-        'Naturally hypoallergenic',
-        'Fits standard 50×75 cm pillows',
+            '100% French stonewashed linen',
+            'Envelope closure — no zips or buttons',
+            'Pre-washed for softness',
+            'Gets softer with each wash',
+            'Naturally hypoallergenic',
+            'Fits standard 50×75 cm pillows',
         ],
         careInstructions:
-        'Machine wash at 40°C. Tumble dry low. Iron slightly damp on linen setting. The natural wrinkles are part of the character — embrace them.',
+            'Machine wash at 40°C. Tumble dry low. Iron slightly damp on linen setting. The natural wrinkles are part of the character — embrace them.',
         sizes: ['Standard (50×75 cm)', 'King (50×90 cm)'],
         colors: [
-        { name: 'Oat', hex: '#D8CCBA' },
-        { name: 'Dusty Rose', hex: '#C9A08A' },
-        { name: 'Charcoal', hex: '#4A4A4A' },
+            { name: 'Oat', hex: '#D8CCBA' },
+            { name: 'Dusty Rose', hex: '#C9A08A' },
+            { name: 'Charcoal', hex: '#4A4A4A' },
         ],
         bgFrom: '#C8B89A',
         bgTo: '#B8A880',
         accentColor: '#8B7355',
+        image: 'https://picsum.photos/seed/aydi-2/800/800',
+        images: [
+            'https://picsum.photos/seed/aydi-2/800/800',
+            'https://picsum.photos/seed/aydi-2b/800/800',
+            'https://picsum.photos/seed/aydi-2c/800/800',
+            'https://picsum.photos/seed/aydi-2d/800/800',
+        ],
     },
     {
         id: 3,
@@ -122,25 +121,32 @@ export const products: Product[] = [
         reviews: 145,
         tag: 'New In',
         description:
-        'A fusion of bamboo and mulberry silk, this flat sheet feels impossibly smooth against the skin. Naturally antibacterial, moisture-wicking, and temperature-smart, it transforms a simple bedtime into a luxury experience. The subtle sheen catches the light beautifully.',
+            'A fusion of bamboo and mulberry silk, this flat sheet feels impossibly smooth against the skin. Naturally antibacterial, moisture-wicking, and temperature-smart, it transforms a simple bedtime into a luxury experience.',
         details: [
-        '70% Bamboo, 30% Mulberry Silk blend',
-        'Naturally antibacterial',
-        'Moisture-wicking and breathable',
-        'Ideal for sensitive skin',
-        'Deep hem with fine stitching',
-        'Comes in a reusable cotton bag',
+            '70% Bamboo, 30% Mulberry Silk blend',
+            'Naturally antibacterial',
+            'Moisture-wicking and breathable',
+            'Ideal for sensitive skin',
+            'Deep hem with fine stitching',
+            'Comes in a reusable cotton bag',
         ],
         careInstructions:
-        'Hand wash or gentle machine cycle at 30°C. Do not tumble dry. Lay flat or hang to dry. Iron on low heat inside out.',
+            'Hand wash or gentle machine cycle at 30°C. Do not tumble dry. Lay flat or hang to dry. Iron on low heat inside out.',
         sizes: ['Single (175×260 cm)', 'Double (230×260 cm)', 'King (270×260 cm)'],
         colors: [
-        { name: 'Champagne', hex: '#F0E0C0' },
-        { name: 'Sage', hex: '#A8C0A0' },
+            { name: 'Champagne', hex: '#F0E0C0' },
+            { name: 'Sage', hex: '#A8C0A0' },
         ],
         bgFrom: '#B8A070',
         bgTo: '#A08A5A',
         accentColor: '#F7F2E9',
+        image: 'https://picsum.photos/seed/aydi-3/800/800',
+        images: [
+            'https://picsum.photos/seed/aydi-3/800/800',
+            'https://picsum.photos/seed/aydi-3b/800/800',
+            'https://picsum.photos/seed/aydi-3c/800/800',
+            'https://picsum.photos/seed/aydi-3d/800/800',
+        ],
     },
     {
         id: 4,
@@ -151,20 +157,27 @@ export const products: Product[] = [
         rating: 4.6,
         reviews: 98,
         description:
-        'Hotel-grade microfiber pillows that support while they pamper. The medium-firm fill strikes the perfect balance for all sleep positions, while the soft cover prevents bunching. These pillows are built to hold their shape night after night.',
+            'Hotel-grade microfiber pillows that support while they pamper. The medium-firm fill strikes the perfect balance for all sleep positions, while the soft cover prevents bunching.',
         details: [
-        'Hotel-grade microfiber fill',
-        'Medium-firm support — suits all sleep positions',
-        'Anti-mite & hypoallergenic',
-        'Soft 200TC cover',
-        'Size: 50×75 cm each',
-        'Set of 2 pillows',
+            'Hotel-grade microfiber fill',
+            'Medium-firm support — suits all sleep positions',
+            'Anti-mite & hypoallergenic',
+            'Soft 200TC cover',
+            'Size: 50×75 cm each',
+            'Set of 2 pillows',
         ],
         careInstructions:
-        'Machine wash on gentle at 40°C. Tumble dry low with a couple of clean tennis balls to restore loft. Air out monthly.',
+            'Machine wash on gentle at 40°C. Tumble dry low with a couple of clean tennis balls to restore loft. Air out monthly.',
         bgFrom: '#CFC0A8',
         bgTo: '#BAA888',
         accentColor: '#7A6B52',
+        image: 'https://picsum.photos/seed/aydi-4/800/800',
+        images: [
+            'https://picsum.photos/seed/aydi-4/800/800',
+            'https://picsum.photos/seed/aydi-4b/800/800',
+            'https://picsum.photos/seed/aydi-4c/800/800',
+            'https://picsum.photos/seed/aydi-4d/800/800',
+        ],
     },
 
     // ── HOME DÉCOR ────────────────────────────────────────────────────────────
@@ -180,25 +193,32 @@ export const products: Product[] = [
         tag: 'New In',
         isBestSeller: true,
         description:
-        'Three hand-thrown terracotta vases in graduating heights, each unique from the potter\'s wheel. Their warm rust tones and organic imperfections make them a striking statement on any shelf, mantelpiece, or dining table — with or without florals. A trio that feels like it belongs to every aesthetic.',
+            "Three hand-thrown terracotta vases in graduating heights, each unique from the potter's wheel. Their warm rust tones and organic imperfections make them a striking statement on any shelf, mantelpiece, or dining table.",
         details: [
-        'Hand-thrown on a potter\'s wheel',
-        'Heights: 12 cm, 18 cm, 24 cm',
-        'Unglazed interior — for dry arrangements only',
-        'Each piece is one-of-a-kind',
-        'Made by artisans in Khurja, UP',
-        'Set of 3 vases',
+            "Hand-thrown on a potter's wheel",
+            'Heights: 12 cm, 18 cm, 24 cm',
+            'Unglazed interior — for dry arrangements only',
+            'Each piece is one-of-a-kind',
+            'Made by artisans in Khurja, UP',
+            'Set of 3 vases',
         ],
         careInstructions:
-        'Wipe clean with a dry or slightly damp cloth. Do not submerge in water. Not suitable for water-filled flower arrangements unless lined.',
+            'Wipe clean with a dry or slightly damp cloth. Do not submerge in water. Not suitable for water-filled flower arrangements unless lined.',
         colors: [
-        { name: 'Terracotta', hex: '#B85C38' },
-        { name: 'Sandstone', hex: '#D4A878' },
-        { name: 'Raw Clay', hex: '#C4A060' },
+            { name: 'Terracotta', hex: '#B85C38' },
+            { name: 'Sandstone', hex: '#D4A878' },
+            { name: 'Raw Clay', hex: '#C4A060' },
         ],
         bgFrom: '#B85C38',
         bgTo: '#A04E2E',
         accentColor: '#F7F2E9',
+        image: 'https://picsum.photos/seed/aydi-5/800/800',
+        images: [
+            'https://picsum.photos/seed/aydi-5/800/800',
+            'https://picsum.photos/seed/aydi-5b/800/800',
+            'https://picsum.photos/seed/aydi-5c/800/800',
+            'https://picsum.photos/seed/aydi-5d/800/800',
+        ],
     },
     {
         id: 6,
@@ -211,20 +231,27 @@ export const products: Product[] = [
         tag: 'Best Seller',
         isBestSeller: true,
         description:
-        'Handcrafted from unbleached cotton rope, this macramé wall hanging brings natural texture and artisanal warmth to any wall. Each piece is knotted by hand, making no two exactly alike. The dowel and hanging cord are included — simply hang and transform your space.',
+            'Handcrafted from unbleached cotton rope, this macramé wall hanging brings natural texture and artisanal warmth to any wall. Each piece is knotted by hand, making no two exactly alike.',
         details: [
-        '100% unbleached natural cotton rope',
-        'Handknotted — no two are identical',
-        'Width: ~65 cm | Drop: ~90 cm',
-        'Includes driftwood dowel & jute cord',
-        'Ready to hang',
-        'Handmade in Rajasthan',
+            '100% unbleached natural cotton rope',
+            'Handknotted — no two are identical',
+            'Width: ~65 cm | Drop: ~90 cm',
+            'Includes driftwood dowel & jute cord',
+            'Ready to hang',
+            'Handmade in Rajasthan',
         ],
         careInstructions:
-        'Spot clean only with a dry cloth. Avoid direct sunlight to prevent fading. Gently fluff and reshape fringe periodically.',
+            'Spot clean only with a dry cloth. Avoid direct sunlight to prevent fading. Gently fluff and reshape fringe periodically.',
         bgFrom: '#C4946A',
         bgTo: '#A87850',
         accentColor: '#F7F2E9',
+        image: 'https://picsum.photos/seed/aydi-6/800/800',
+        images: [
+            'https://picsum.photos/seed/aydi-6/800/800',
+            'https://picsum.photos/seed/aydi-6b/800/800',
+            'https://picsum.photos/seed/aydi-6c/800/800',
+            'https://picsum.photos/seed/aydi-6d/800/800',
+        ],
     },
     {
         id: 7,
@@ -237,20 +264,27 @@ export const products: Product[] = [
         reviews: 89,
         tag: 'Top Rated',
         description:
-        'A statement piece that doubles as art. This oval mirror is hand-wrapped in natural rattan, creating a warm, organic frame that complements bohemian, coastal, and Japandi interiors alike. The mirror itself is distortion-free beveled glass for a crisp, clear reflection.',
+            'A statement piece that doubles as art. This oval mirror is hand-wrapped in natural rattan, creating a warm, organic frame that complements bohemian, coastal, and Japandi interiors alike.',
         details: [
-        'Frame: Natural hand-wrapped rattan',
-        'Distortion-free beveled mirror glass',
-        'Dimensions: 55 cm × 75 cm',
-        'Includes wall-mounting hardware',
-        'Suitable for bedroom, hallway, or living room',
-        'Weight: 2.8 kg',
+            'Frame: Natural hand-wrapped rattan',
+            'Distortion-free beveled mirror glass',
+            'Dimensions: 55 cm × 75 cm',
+            'Includes wall-mounting hardware',
+            'Suitable for bedroom, hallway, or living room',
+            'Weight: 2.8 kg',
         ],
         careInstructions:
-        'Wipe mirror with a glass cleaner and soft cloth. Dust rattan frame with a dry brush. Avoid humid environments like bathrooms.',
+            'Wipe mirror with a glass cleaner and soft cloth. Dust rattan frame with a dry brush. Avoid humid environments like bathrooms.',
         bgFrom: '#8B7355',
         bgTo: '#6B5538',
         accentColor: '#C9A86C',
+        image: 'https://picsum.photos/seed/aydi-7/800/800',
+        images: [
+            'https://picsum.photos/seed/aydi-7/800/800',
+            'https://picsum.photos/seed/aydi-7b/800/800',
+            'https://picsum.photos/seed/aydi-7c/800/800',
+            'https://picsum.photos/seed/aydi-7d/800/800',
+        ],
     },
     {
         id: 8,
@@ -261,20 +295,27 @@ export const products: Product[] = [
         rating: 4.5,
         reviews: 312,
         description:
-        'A set of three handwoven jute baskets in nesting sizes, perfect for storing throws, toys, magazines, or plants. Their natural texture adds earthy warmth to any corner, while the sturdy weave ensures they hold their shape through years of daily use.',
+            'A set of three handwoven jute baskets in nesting sizes, perfect for storing throws, toys, magazines, or plants. Their natural texture adds earthy warmth to any corner.',
         details: [
-        '100% natural jute',
-        'Handwoven with reinforced base',
-        'Sizes: S (20×18 cm), M (28×24 cm), L (36×30 cm)',
-        'Set of 3 nesting baskets',
-        'Multi-purpose: storage, planter, display',
-        'Made in West Bengal',
+            '100% natural jute',
+            'Handwoven with reinforced base',
+            'Sizes: S (20×18 cm), M (28×24 cm), L (36×30 cm)',
+            'Set of 3 nesting baskets',
+            'Multi-purpose: storage, planter, display',
+            'Made in West Bengal',
         ],
         careInstructions:
-        'Wipe clean with a barely damp cloth. Allow to dry completely in open air. Avoid prolonged exposure to water or moisture.',
+            'Wipe clean with a barely damp cloth. Allow to dry completely in open air. Avoid prolonged exposure to water or moisture.',
         bgFrom: '#B8946A',
         bgTo: '#9A7A50',
         accentColor: '#F7F2E9',
+        image: 'https://picsum.photos/seed/aydi-8/800/800',
+        images: [
+            'https://picsum.photos/seed/aydi-8/800/800',
+            'https://picsum.photos/seed/aydi-8b/800/800',
+            'https://picsum.photos/seed/aydi-8c/800/800',
+            'https://picsum.photos/seed/aydi-8d/800/800',
+        ],
     },
 
     // ── CANDLES ───────────────────────────────────────────────────────────────
@@ -290,26 +331,33 @@ export const products: Product[] = [
         tag: 'Top Rated',
         isBestSeller: true,
         description:
-        'Hand-poured in small batches using 100% natural soy wax, this pillar candle carries the grounding warmth of aged sandalwood and amber resin. Its slow, clean burn fills your space with a rich, woody fragrance that lingers long after the flame is extinguished. A perfect centrepiece for any living space or a cherished gift.',
+            'Hand-poured in small batches using 100% natural soy wax, this pillar candle carries the grounding warmth of aged sandalwood and amber resin. Its slow, clean burn fills your space with a rich, woody fragrance.',
         details: [
-        'Burn time: 50–60 hours',
-        '100% natural soy wax',
-        'Lead-free cotton wick',
-        'Diameter: 8 cm | Height: 14 cm',
-        'Hand-poured in Lucknow, India',
-        'Phthalate-free fragrance blend',
+            'Burn time: 50–60 hours',
+            '100% natural soy wax',
+            'Lead-free cotton wick',
+            'Diameter: 8 cm | Height: 14 cm',
+            'Hand-poured in Lucknow, India',
+            'Phthalate-free fragrance blend',
         ],
         careInstructions:
-        'Keep away from drafts and flammable materials. Trim wick to 5mm before each use. Never leave a burning candle unattended. Keep out of reach of children and pets.',
+            'Keep away from drafts and flammable materials. Trim wick to 5mm before each use. Never leave a burning candle unattended.',
         sizes: ['Small (6 cm)', 'Medium (8 cm)', 'Large (10 cm)'],
         colors: [
-        { name: 'Ivory', hex: '#F5EFE2' },
-        { name: 'Rust', hex: '#B85C38' },
-        { name: 'Ebony', hex: '#2C1A0E' },
+            { name: 'Ivory', hex: '#F5EFE2' },
+            { name: 'Rust', hex: '#B85C38' },
+            { name: 'Ebony', hex: '#2C1A0E' },
         ],
         bgFrom: '#2C1A0E',
         bgTo: '#3D2412',
         accentColor: '#C9A86C',
+        image: 'https://picsum.photos/seed/aydi-9/800/800',
+        images: [
+            'https://picsum.photos/seed/aydi-9/800/800',
+            'https://picsum.photos/seed/aydi-9b/800/800',
+            'https://picsum.photos/seed/aydi-9c/800/800',
+            'https://picsum.photos/seed/aydi-9d/800/800',
+        ],
     },
     {
         id: 10,
@@ -320,25 +368,32 @@ export const products: Product[] = [
         rating: 4.8,
         reviews: 267,
         description:
-        'A luxurious fusion of Bulgarian rose absolute and dark, smoky oud wood — poured into a reusable frosted amber glass jar. This candle transports you to an eastern bazaar with every breath. The jar makes a beautiful vase or storage vessel once the candle has burned through.',
+            'A luxurious fusion of Bulgarian rose absolute and dark, smoky oud wood — poured into a reusable frosted amber glass jar. This candle transports you to an eastern bazaar with every breath.',
         details: [
-        'Burn time: 40–45 hours',
-        'Soy-coconut wax blend',
-        'Bulgarian rose & oud wood fragrance',
-        'Reusable frosted amber glass jar',
-        'Diameter: 7.5 cm | Height: 9 cm',
-        'Lead-free wick',
+            'Burn time: 40–45 hours',
+            'Soy-coconut wax blend',
+            'Bulgarian rose & oud wood fragrance',
+            'Reusable frosted amber glass jar',
+            'Diameter: 7.5 cm | Height: 9 cm',
+            'Lead-free wick',
         ],
         careInstructions:
-        'For first burn, allow wax to melt to edge of jar to prevent tunneling. Trim wick before each use. Discontinue use when 1 cm of wax remains.',
+            'For first burn, allow wax to melt to edge of jar to prevent tunneling. Trim wick before each use. Discontinue use when 1 cm of wax remains.',
         sizes: ['Small (180g)', 'Large (320g)'],
         colors: [
-        { name: 'Amber', hex: '#C9853A' },
-        { name: 'Smoke', hex: '#4A3530' },
+            { name: 'Amber', hex: '#C9853A' },
+            { name: 'Smoke', hex: '#4A3530' },
         ],
         bgFrom: '#6B3A2A',
         bgTo: '#4A2218',
         accentColor: '#C9A86C',
+        image: 'https://picsum.photos/seed/aydi-10/800/800',
+        images: [
+            'https://picsum.photos/seed/aydi-10/800/800',
+            'https://picsum.photos/seed/aydi-10b/800/800',
+            'https://picsum.photos/seed/aydi-10c/800/800',
+            'https://picsum.photos/seed/aydi-10d/800/800',
+        ],
     },
     {
         id: 11,
@@ -352,20 +407,27 @@ export const products: Product[] = [
         tag: 'Best Seller',
         isBestSeller: true,
         description:
-        'Crisp, fresh eucalyptus woven with a whisper of mint — twelve tealights that turn any dinner table, bathroom ledge, or windowsill into an aromatic ritual. Made with natural soy wax and unbleached cotton wicks, they burn clean and true for up to 4 hours each.',
+            'Crisp, fresh eucalyptus woven with a whisper of mint — twelve tealights that turn any dinner table, bathroom ledge, or windowsill into an aromatic ritual.',
         details: [
-        'Pack of 12 tealights',
-        'Burn time: ~4 hours each',
-        '100% natural soy wax',
-        'Unbleached cotton wicks',
-        'Eucalyptus & mint fragrance',
-        'Reusable aluminum cups',
+            'Pack of 12 tealights',
+            'Burn time: ~4 hours each',
+            '100% natural soy wax',
+            'Unbleached cotton wicks',
+            'Eucalyptus & mint fragrance',
+            'Reusable aluminum cups',
         ],
         careInstructions:
-        'Place on a heat-resistant surface. Keep away from drafts. Do not move while burning. Allow wax to solidify before replacing.',
+            'Place on a heat-resistant surface. Keep away from drafts. Do not move while burning. Allow wax to solidify before replacing.',
         bgFrom: '#4A6B4A',
         bgTo: '#3A5A3A',
         accentColor: '#C9A86C',
+        image: 'https://picsum.photos/seed/aydi-11/800/800',
+        images: [
+            'https://picsum.photos/seed/aydi-11/800/800',
+            'https://picsum.photos/seed/aydi-11b/800/800',
+            'https://picsum.photos/seed/aydi-11c/800/800',
+            'https://picsum.photos/seed/aydi-11d/800/800',
+        ],
     },
     {
         id: 12,
@@ -376,20 +438,27 @@ export const products: Product[] = [
         rating: 4.6,
         reviews: 188,
         description:
-        'Six luscious wax melts in a warm vanilla-amber blend — designed for use with any electric or tealight wax warmer. Each melt fills the room with a cosy, bakery-like warmth that lingers for hours. Gifted in a beautiful kraft box, they make the perfect housewarming present.',
+            'Six luscious wax melts in a warm vanilla-amber blend — designed for use with any electric or tealight wax warmer. Gifted in a beautiful kraft box, they make the perfect housewarming present.',
         details: [
-        'Set of 6 clamshell wax melts',
-        'Each melt: ~8 hrs of fragrance',
-        'Soy-paraffin blend',
-        'Compatible with all wax warmers',
-        'Vanilla, tonka bean & amber fragrance',
-        'Gifted in kraft box with ribbon',
+            'Set of 6 clamshell wax melts',
+            'Each melt: ~8 hrs of fragrance',
+            'Soy-paraffin blend',
+            'Compatible with all wax warmers',
+            'Vanilla, tonka bean & amber fragrance',
+            'Gifted in kraft box with ribbon',
         ],
         careInstructions:
-        'Use in a wax warmer only — never apply direct flame to melts. Keep children and pets away from warmer. Replace melt when fragrance fades.',
+            'Use in a wax warmer only — never apply direct flame to melts. Keep children and pets away from warmer. Replace melt when fragrance fades.',
         bgFrom: '#5A3A1A',
         bgTo: '#3D2510',
         accentColor: '#D4A87C',
+        image: 'https://picsum.photos/seed/aydi-12/800/800',
+        images: [
+            'https://picsum.photos/seed/aydi-12/800/800',
+            'https://picsum.photos/seed/aydi-12b/800/800',
+            'https://picsum.photos/seed/aydi-12c/800/800',
+            'https://picsum.photos/seed/aydi-12d/800/800',
+        ],
     },
 
     // ── CROCKERY ──────────────────────────────────────────────────────────────
@@ -404,26 +473,33 @@ export const products: Product[] = [
         tag: 'Fan Favourite',
         isBestSeller: true,
         description:
-        'Four hand-thrown mugs, each with its own subtle personality — slight variations in glaze and form that make mornings feel a little more intentional. The thick walls retain heat beautifully, and the generous handle fits comfortably in any hand. Dishwasher and microwave safe.',
+            'Four hand-thrown mugs, each with its own subtle personality — slight variations in glaze and form that make mornings feel a little more intentional. Dishwasher and microwave safe.',
         details: [
-        'Set of 4 hand-thrown ceramic mugs',
-        'Capacity: ~300ml each',
-        'High-fire stoneware',
-        'Food-safe reactive glaze',
-        'Dishwasher & microwave safe',
-        'Made by studio potters in Jaipur',
+            'Set of 4 hand-thrown ceramic mugs',
+            'Capacity: ~300ml each',
+            'High-fire stoneware',
+            'Food-safe reactive glaze',
+            'Dishwasher & microwave safe',
+            'Made by studio potters in Jaipur',
         ],
         careInstructions:
-        'Dishwasher safe on the top rack. Avoid thermal shock — do not move from freezer to microwave directly. Crazing is a natural characteristic, not a defect.',
+            'Dishwasher safe on the top rack. Avoid thermal shock — do not move from freezer to microwave directly. Crazing is a natural characteristic, not a defect.',
         colors: [
-        { name: 'Forest', hex: '#6B7F65' },
-        { name: 'Sand', hex: '#C4A878' },
-        { name: 'Slate', hex: '#7A8090' },
-        { name: 'Rust', hex: '#B85C38' },
+            { name: 'Forest', hex: '#6B7F65' },
+            { name: 'Sand', hex: '#C4A878' },
+            { name: 'Slate', hex: '#7A8090' },
+            { name: 'Rust', hex: '#B85C38' },
         ],
         bgFrom: '#6B7F65',
         bgTo: '#526148',
         accentColor: '#D4C0A0',
+        image: 'https://picsum.photos/seed/aydi-13/800/800',
+        images: [
+            'https://picsum.photos/seed/aydi-13/800/800',
+            'https://picsum.photos/seed/aydi-13b/800/800',
+            'https://picsum.photos/seed/aydi-13c/800/800',
+            'https://picsum.photos/seed/aydi-13d/800/800',
+        ],
     },
     {
         id: 14,
@@ -436,24 +512,31 @@ export const products: Product[] = [
         reviews: 145,
         tag: 'New In',
         description:
-        'Wide, flat dinner plates with a speckled reactive glaze that pools differently on every piece. The neutral stone tone complements any food and makes plating feel effortless — whether it\'s a weeknight pasta or a Sunday dinner party. Set of four, each uniquely marked.',
+            "Wide, flat dinner plates with a speckled reactive glaze that pools differently on every piece. The neutral stone tone complements any food and makes plating feel effortless.",
         details: [
-        'Set of 4 dinner plates',
-        'Diameter: 27 cm',
-        'Stoneware with reactive speckle glaze',
-        'Dishwasher, microwave & oven safe (up to 200°C)',
-        'Stackable & chip-resistant rim',
-        'Made in Khurja, UP',
+            'Set of 4 dinner plates',
+            'Diameter: 27 cm',
+            'Stoneware with reactive speckle glaze',
+            'Dishwasher, microwave & oven safe (up to 200°C)',
+            'Stackable & chip-resistant rim',
+            'Made in Khurja, UP',
         ],
         careInstructions:
-        'Dishwasher safe. Oven safe up to 200°C. Avoid broiler or open flame. Stacking pads recommended to protect glaze.',
+            'Dishwasher safe. Oven safe up to 200°C. Avoid broiler or open flame. Stacking pads recommended to protect glaze.',
         colors: [
-        { name: 'Stone', hex: '#B0A898' },
-        { name: 'Charcoal', hex: '#4A4848' },
+            { name: 'Stone', hex: '#B0A898' },
+            { name: 'Charcoal', hex: '#4A4848' },
         ],
         bgFrom: '#5A5A6A',
         bgTo: '#3A3A4A',
         accentColor: '#C0BCA8',
+        image: 'https://picsum.photos/seed/aydi-14/800/800',
+        images: [
+            'https://picsum.photos/seed/aydi-14/800/800',
+            'https://picsum.photos/seed/aydi-14b/800/800',
+            'https://picsum.photos/seed/aydi-14c/800/800',
+            'https://picsum.photos/seed/aydi-14d/800/800',
+        ],
     },
     {
         id: 15,
@@ -464,24 +547,31 @@ export const products: Product[] = [
         rating: 4.6,
         reviews: 221,
         description:
-        'Three mismatched-but-matching bowls that tell a story of the craft. Graduating in size from a small dipping bowl to a wide ramen-style bowl, each carries the same earthy glaze in a slightly different shade. Beautiful as a set, equally versatile used individually.',
+            'Three mismatched-but-matching bowls that tell a story of the craft. Graduating in size from a small dipping bowl to a wide ramen-style bowl, each carries the same earthy glaze in a slightly different shade.',
         details: [
-        'Set of 3 graduating bowls',
-        'Sizes: 12 cm, 16 cm, 22 cm diameter',
-        'High-fire stoneware, food-safe glaze',
-        'Dishwasher & microwave safe',
-        'Suitable for hot and cold foods',
-        'Handmade — minor variations in glaze',
+            'Set of 3 graduating bowls',
+            'Sizes: 12 cm, 16 cm, 22 cm diameter',
+            'High-fire stoneware, food-safe glaze',
+            'Dishwasher & microwave safe',
+            'Suitable for hot and cold foods',
+            'Handmade — minor variations in glaze',
         ],
         careInstructions:
-        'Dishwasher safe on the top rack. Suitable for microwave. Not recommended for direct oven use.',
+            'Dishwasher safe on the top rack. Suitable for microwave. Not recommended for direct oven use.',
         colors: [
-        { name: 'Mocha', hex: '#7A6050' },
-        { name: 'Cream', hex: '#E8D8C0' },
+            { name: 'Mocha', hex: '#7A6050' },
+            { name: 'Cream', hex: '#E8D8C0' },
         ],
         bgFrom: '#7A6050',
         bgTo: '#5A4838',
         accentColor: '#D4C0A0',
+        image: 'https://picsum.photos/seed/aydi-15/800/800',
+        images: [
+            'https://picsum.photos/seed/aydi-15/800/800',
+            'https://picsum.photos/seed/aydi-15b/800/800',
+            'https://picsum.photos/seed/aydi-15c/800/800',
+            'https://picsum.photos/seed/aydi-15d/800/800',
+        ],
     },
     {
         id: 16,
@@ -492,35 +582,46 @@ export const products: Product[] = [
         rating: 4.7,
         reviews: 98,
         description:
-        'Two matte-finish serving platters — one oval, one rectangular — designed for the table you want to show off. The unglazed matte exterior feels extraordinary in the hand and contrasts beautifully against vibrant food. Host with quiet confidence.',
+            'Two matte-finish serving platters — one oval, one rectangular — designed for the table you want to show off. The unglazed matte exterior feels extraordinary in the hand and contrasts beautifully against vibrant food.',
         details: [
-        'Set of 2 platters (1 oval + 1 rectangular)',
-        'Oval: 32×22 cm | Rectangular: 35×18 cm',
-        'Matte exterior, food-safe satin interior glaze',
-        'Oven safe up to 180°C',
-        'Dishwasher safe',
-        'Made in studio kilns in Bengaluru',
+            'Set of 2 platters (1 oval + 1 rectangular)',
+            'Oval: 32×22 cm | Rectangular: 35×18 cm',
+            'Matte exterior, food-safe satin interior glaze',
+            'Oven safe up to 180°C',
+            'Dishwasher safe',
+            'Made in studio kilns in Bengaluru',
         ],
         careInstructions:
-        'Dishwasher safe. Oven safe up to 180°C — preheat gradually. Avoid stacking heavy items on the matte exterior to prevent scuffs.',
+            'Dishwasher safe. Oven safe up to 180°C — preheat gradually. Avoid stacking heavy items on the matte exterior to prevent scuffs.',
         colors: [
-        { name: 'Fog', hex: '#C0C4C8' },
-        { name: 'Espresso', hex: '#3A2A20' },
+            { name: 'Fog', hex: '#C0C4C8' },
+            { name: 'Espresso', hex: '#3A2A20' },
         ],
         bgFrom: '#6A5A4A',
         bgTo: '#4A3A2A',
         accentColor: '#C8B898',
+        image: 'https://picsum.photos/seed/aydi-16/800/800',
+        images: [
+            'https://picsum.photos/seed/aydi-16/800/800',
+            'https://picsum.photos/seed/aydi-16b/800/800',
+            'https://picsum.photos/seed/aydi-16c/800/800',
+            'https://picsum.photos/seed/aydi-16d/800/800',
+        ],
     },
 ]
 
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
-export const getProductById = (id: number): Product | undefined => products.find((p) => p.id === id)
+export const getProductById = (id: number): Product | undefined =>
+    products.find((p) => p.id === id)
 
-export const getProductBySlug = (slug: string): Product | undefined => products.find((p) => p.slug === slug)
+export const getProductBySlug = (slug: string): Product | undefined =>
+    products.find((p) => p.slug === slug)
 
-export const getProductsByCategory = (category: Category): Product[] => products.filter((p) => p.category === category)
+export const getProductsByCategory = (category: Category): Product[] =>
+    products.filter((p) => p.category === category)
 
-export const getBestSellers = (): Product[] => products.filter((p) => p.isBestSeller)
+export const getBestSellers = (): Product[] =>
+    products.filter((p) => p.isBestSeller)
 
 export const CATEGORIES: Category[] = ['Beddings', 'Home Décor', 'Candles', 'Crockery']
