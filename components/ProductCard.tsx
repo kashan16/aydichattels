@@ -185,11 +185,11 @@ export default function ProductInfoPage({ product }: { product: Product }) {
                     style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 70%)' }}
                 />
 
-                <Icon
+                {/* <Icon
                     size={110}
                     style={{ color: product.accentColor }}
                     className="relative z-10 drop-shadow-lg"
-                />
+                /> */}
 
                 {/* Tag */}
                 {product.tag && (
